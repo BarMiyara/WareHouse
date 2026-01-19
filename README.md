@@ -1,16 +1,20 @@
 <h1 align="center">🏭 WareHouse</h1>
 
 <p align="center">
-  <b>C++ Warehouse Simulation</b> • <b>Config-Driven</b> • <b>CLI Actions Engine</b> • <b>OOP</b>
+  <b>C++ Warehouse Simulation</b> • <b>Config-Driven</b> • <b>CLI Actions Engine</b> • <b>OOP Design</b>
 </p>
 
 <p align="center">
-  <span>
-    <img alt="C++" src="https://img.shields.io/badge/C%2B%2B-11%2F14-blue" />
-    <img alt="Build" src="https://img.shields.io/badge/Build-make-success" />
-    <img alt="Platform" src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-lightgrey" />
-    <img alt="Status" src="https://img.shields.io/badge/Status-stable-success" />
-  </span>
+  A clean <b>warehouse management simulation</b> written in <b>C++</b>, built around an actions-based engine, 
+  a configurable input file, and a structured OOP architecture.
+</p>
+
+<p align="center">
+  <img alt="Language" src="https://img.shields.io/badge/Language-C%2B%2B-blue" />
+  <img alt="Paradigm" src="https://img.shields.io/badge/Paradigm-OOP-success" />
+  <img alt="Interface" src="https://img.shields.io/badge/Interface-CLI-lightgrey" />
+  <img alt="Build" src="https://img.shields.io/badge/Build-makefile-orange" />
+  <img alt="Status" src="https://img.shields.io/badge/Status-stable-success" />
 </p>
 
 <p align="center">
@@ -18,163 +22,86 @@
   <a href="#-overview">Overview</a> •
   <a href="#-architecture">Architecture</a> •
   <a href="#-project-structure">Structure</a> •
-  <a href="#-commands">Commands</a> •
-  <a href="#-troubleshooting">Troubleshooting</a>
-</p>
-
-<hr/>
-
-<h2>🎬 Demo</h2>
-<p style="margin-top:0;">
-  Add a GIF or screenshot to instantly make the repo look premium.
-</p>
-
-<p align="center">
-  <!-- Put your file at: assets/demo.gif (recommended) OR assets/demo.png -->
-  <img src="assets/demo.gif" alt="Demo" width="900" />
-</p>
-
-<hr/>
-
-<h2 id="-overview">⚡ Overview</h2>
-<ul>
-  <li>✅ <b>Warehouse simulation</b> in C++ with an interactive CLI</li>
-  <li>✅ <b>Config-driven startup</b> — loads customers/volunteers/scenario from a text file</li>
-  <li>✅ <b>Action-based engine</b> — each command is handled as a structured operation</li>
-  <li>✅ <b>OOP design</b> — clear separation between data models, actions, and orchestration</li>
-  <li>✅ Focus on <b>correctness</b>, <b>edge cases</b>, and <b>stable runtime behavior</b></li>
-</ul>
-
-<p>
-  If it survives “dirty” inputs and long runs — it’s not just working… it’s <b>solid</b>.
+  <a href="#-build--run">Build & Run</a> •
+  <a href="#-how-it-works">How it Works</a>
 </p>
 
 <hr/>
 
 <h2 id="-quick-run">🚀 Quick Run</h2>
 
-<h3>1) Build</h3>
-<pre><code>make</code></pre>
+<p>From the repository root:</p>
 
-<h3>2) Run</h3>
-<pre><code>./warehouse &lt;path-to-config&gt;</code></pre>
+```bash
+make
+./WareHouse input_file.txt
+```
+<hr/> <h2 id="-overview">⚡ Overview</h2> <ul> <li>✅ <b>Warehouse simulation engine</b> in modern C++ style</li> <li>✅ <b>Config-driven</b> behavior using an <code>input_file.txt</code></li> <li>✅ <b>Actions system</b> that drives the entire CLI (command-based workflow)</li> <li>✅ Strong <b>OOP architecture</b>: clear separation between domain objects</li> <li>✅ Includes core entities: <b>Customers</b>, <b>Orders</b>, <b>Volunteers</b>, and <b>Actions</b></li> </ul> <p> The project simulates a small warehouse environment: creating customers and orders, assigning volunteers, and performing actions via the CLI flow. </p> <hr/> <h2 id="-architecture">🧠 Architecture</h2> <p>The project is built around a few core layers:</p> <ul> <li><b>WareHouse</b> — the main simulation controller (state + orchestration)</li> <li><b>Action</b> — an actions engine that controls the CLI behavior</li> <li><b>Customer</b> — customer data + order interactions</li> <li><b>Order</b> — order entity with lifecycle/state</li> <li><b>Volunteer</b> — handles order processing / deliveries / warehouse workflow</li> </ul> <p>High-level flow:</p>
 
-<p><b>Example:</b></p>
-<pre><code>./warehouse input_file.txt</code></pre>
+```text
+input_file.txt  -->  WareHouse init
+                     |
+                     v
+                  CLI loop
+                     |
+                     v
+             Action::act() executes
+                     |
+                     v
+       updates Customers / Orders / Volunteers state
 
-<hr/>
+```
 
-<h2 id="-architecture">🧠 Architecture</h2>
-<p>
-  The project is structured as a small simulation system:
-</p>
+<hr/> <h2 id="-project-structure">📁 Project Structure</h2>
 
-<ul>
-  <li><b>Parser / Loader</b> → reads the configuration file and creates initial state</li>
-  <li><b>WareHouse (Orchestrator)</b> → owns the simulation state and main loop</li>
-  <li><b>Actions</b> → each CLI command triggers an action object / handler</li>
-  <li><b>Entities</b> → customers, volunteers, orders, etc.</li>
-</ul>
-
-<p align="center">
-  <img alt="Flow" src="https://img.shields.io/badge/Flow-config%20load%20%E2%86%92%20CLI%20loop%20%E2%86%92%20actions%20%E2%86%92%20state%20updates-blueviolet" />
-</p>
-
-<hr/>
-
-<h2 id="-commands">🕹️ Commands</h2>
-<p>
-  Put your exact CLI commands here (names depend on your implementation). Example layout:
-</p>
-
-<ul>
-  <li><code>step &lt;n&gt;</code> — advance simulation by <b>n</b> steps</li>
-  <li><code>order &lt;customer_id&gt;</code> — create a new order</li>
-  <li><code>customerStatus &lt;customer_id&gt;</code> — show customer info + orders</li>
-  <li><code>orderStatus &lt;order_id&gt;</code> — show order status</li>
-  <li><code>log</code> — show executed actions log</li>
-  <li><code>backup</code> / <code>restore</code> — snapshot & recover state</li>
-  <li><code>close</code> — end simulation</li>
-</ul>
-
-<p>
-  <b>🔥 Want me to make this section perfect?</b><br/>
-  Send me a screenshot / paste of the assignment’s required command list, ואני מסדר את זה בדיוק 1:1.
-</p>
-
-<hr/>
-
-<h2 id="-project-structure">📁 Project Structure</h2>
-<p>
-  Adjust this tree to your real repo layout (still looks premium even if you keep it as-is):
-</p>
-
-<pre><code>WareHouse/
-├─ makefile
+```text
+WareHouse/
+├─ README.md
 ├─ main.cpp
+├─ makefile
 ├─ input_file.txt
-├─ include/
-│  ├─ WareHouse.h
-│  └─ ...
-├─ src/
-│  ├─ WareHouse.cpp
-│  └─ ...
-└─ assets/
-   ├─ demo.gif
-   └─ demo.png
-</code></pre>
+├─ WareHouse.h / WareHouse.cpp
+├─ Action.h / Action.cpp
+├─ Customer.h / Customer.cpp
+├─ Order.h / Order.cpp
+└─ Volunteer.h / Volunteer.cpp
 
-<hr/>
+```
+<hr/> <h2 id="-build--run">🧰 Build & Run</h2> <h3>✅ Build</h3>
 
-<h2>🧪 Testing (optional, but looks pro)</h2>
-<p>
-  Even without unit tests, you can include a “manual checklist”:
-</p>
+```bash
+make
+```
 
-<ul>
-  <li>☑️ Invalid config lines → handled gracefully</li>
-  <li>☑️ Many orders / long run → no crash, consistent state</li>
-  <li>☑️ Backup/restore repeated → stable behavior</li>
-  <li>☑️ Edge inputs (0/negative steps, missing ids) → safe responses</li>
-</ul>
+<h3>▶️ Run</h3>
 
-<hr/>
+```bash
+./WareHouse input_file.txt
+```
 
-<h2 id="-troubleshooting">🧯 Troubleshooting</h2>
+<p> If your executable name is different, run: </p>
 
-<h3>“usage: warehouse &lt;config_path&gt;”</h3>
-<p>
-  You forgot to pass the configuration file:
-</p>
-<pre><code>./warehouse input_file.txt</code></pre>
+```bash
+ls
+```
 
-<h3>Demo image not showing</h3>
-<p>
-  Make sure the file exists:
-</p>
-<pre><code>ls -lh assets/</code></pre>
-<p>
-  And the README points to the correct name:
-  <code>assets/demo.gif</code> or <code>assets/demo.png</code>
-</p>
+<hr/> <h2 id="-how-it-works">🕹️ How it Works</h2> <p> This project runs as a <b>command-based simulation</b>. The CLI receives commands, each command maps into an <b>Action</b> object, and the action updates the system state. </p> <h3>Core Concepts</h3> <ul> <li><b>Customers</b> can create orders</li> <li><b>Orders</b> move through a lifecycle (created → processing → completed)</li> <li><b>Volunteers</b> handle different responsibilities in the warehouse flow</li> <li><b>Actions</b> are the “API” of the CLI — every user command triggers an action</li> </ul> <hr/> <h2>🧾 Input File</h2> <p> The simulation is initialized from <code>input_file.txt</code>. This file defines the starting configuration (entities + initial state). </p> <p> ✅ Tip: If you want the repository to look even more premium, add a short example snippet here. </p> <hr/> <h2>🧯 Troubleshooting</h2> <h3>Make fails / missing compiler</h3> <p>Make sure you have a compiler installed:</p>
 
-<h3>Build fails</h3>
-<p>
-  Verify you are in the repository root (where the makefile is):
-</p>
-<pre><code>pwd
-ls</code></pre>
+```bash
+g++ --version
+make --version
+```
 
-<hr/>
+<h3>Permission denied</h3>
 
-<h2>👥 Author</h2>
-<ul>
-  <li><b>Bar Miyara</b> — <a href="https://github.com/BarMiyara">github.com/BarMiyara</a></li>
-</ul>
+```bash
+chmod +x WareHouse
+```
 
-<hr/>
+<h3>Nothing runs / wrong executable name</h3>
 
-<h2>📄 License</h2>
-<p>
-  Educational project.
-</p>
+```bash
+ls
+```
+
+<hr/> <h2>🧭 Roadmap</h2> <ul> <li>[ ] Add a GitHub Actions workflow to build on every push</li> <li>[ ] Add a detailed “Commands” section with CLI examples</li> <li>[ ] Add a short demo GIF (<code>assets/demo.gif</code>)</li> </ul> <hr/> <h2>👥 Author</h2> <ul> <li><b>Bar Miyara</b> — https://github.com/BarMiyara</li> </ul> <hr/> <h2>📄 License</h2> <p> Educational project. You are free to use and learn from it. </p> 
